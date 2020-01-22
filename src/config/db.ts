@@ -7,7 +7,7 @@ class DataBase {
     constructor() { }
 
     createConnection() {
-        mongoose.connect(this.DB_URI);
+        mongoose.connect(this.DB_URI, { useCreateIndex: true, useNewUrlParser: true });
         this.logger(this.DB_URI);
     }
 

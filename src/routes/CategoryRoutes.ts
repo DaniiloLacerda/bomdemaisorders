@@ -3,7 +3,7 @@ import * as httpStatus from 'http-status';
 
 const sendResponse = function (res, statusCode, data) {
     res.status(statusCode).json({ 'result': data });
-}
+};
 
 class CategoryRoutes {
 
@@ -12,48 +12,48 @@ class CategoryRoutes {
     getAll(req, res) {
         CategoryController
             .getAll()
-            .then(product => sendResponse(res, httpStatus.OK, product))
-            .catch(err => console.error.bind(console, 'Erro: ' + err));
-    }
+            .then(result => sendResponse(res, httpStatus.OK, result))
+            .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
+    };
 
     getByID(req, res) {
         const id = { _id: req.params.id };
-        if (!id) {
-            sendResponse(res, httpStatus.OK, 'Categoria não encontrado');
-        }
 
         CategoryController
             .getByID(id)
-            .then(product => sendResponse(res, httpStatus.OK, product))
-            .then(err => console.error.bind(console, 'Erro: ' + err));
+            .then(result => {
+                if (result !== null) {
+                    sendResponse(res, httpStatus.OK, result)
+                } else {
+                    sendResponse(res, httpStatus.OK, "Fornecedor não localizado")
+                }
+            }).catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     create(req, res) {
-        const product = req.body;
+        const category = req.body;
         CategoryController
-            .create(product)
-            .then(product => sendResponse(res, httpStatus.CREATED, "Categoria Criado com Sucesso"))
-            .catch(err => console.error.bind(console, 'Erro: ' + err));
-    }
+            .create(category)
+            .then(result => sendResponse(res, httpStatus.CREATED, result))
+            .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
+    };
 
     update(req, res) {
         const id = { _id: req.params.id }
-        const product = req.body;
+        const category = req.body;
         CategoryController
-            .update(id, product)
-            //como retornar novo produto alterado
-            .then(product => sendResponse(res, httpStatus.OK, 'Categoria Alterado com Sucesso'))
-            .catch(err => console.error.bind(console, 'Error: ' + err))
-    }
+            .update(id, category)
+            .then(result => sendResponse(res, httpStatus.OK, result))
+            .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
+    };
 
     delete(req, res) {
         const id = { _id: req.params.id }
         CategoryController
             .delete(id)
             .then(result => sendResponse(res, httpStatus.OK, result))
-            .catch(err => console.error.bind(console, 'Erro: ' + err));
-    }
-}
-
+            .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
+    };
+};
 
 export default new CategoryRoutes();
