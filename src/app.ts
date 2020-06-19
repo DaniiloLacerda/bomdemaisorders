@@ -6,11 +6,13 @@ import ProductRoutes from './routes/ProductRoutes';
 import CategoryRoutes from './routes/CategoryRoutes';
 import VendorRoutes from './routes/VendorRoutes';
 import OrderRoutes from './routes/OrderRoutes';
+import OrganizationRoutes from './routes/OrganizationRoutes';
 import Middleware from './helpers/Middleware';
 import ProductSchema from './helpers/schemas/ProductSchema';
 import CategorySchema from './helpers/schemas/CategorySchema';
 import VendorSchema from './helpers/schemas/VendorSchema';
 import OrderSchema from './helpers/schemas/OrderSchema';
+import OrganizationSchema from './helpers/schemas/OrganizationSchema';
 
 class App {
     public app: express.Application;
@@ -23,6 +25,7 @@ class App {
         this.categoryRoutes();
         this.vendorRoutes();
         this.orderRoutes();
+        this.organizationRoutes();
         this.database = new DataBase();
         this.dataBaseConnection();
     };
@@ -63,6 +66,14 @@ class App {
         this.app.route('/api/order/:id').delete(OrderRoutes.delete)
         this.app.route('/api/order').post(Middleware.middleware(OrderSchema, 'body'), OrderRoutes.create);
         this.app.route('/api/order/:id').put(Middleware.middleware(OrderSchema, 'body'), OrderRoutes.update)
+    };
+
+    organizationRoutes() {
+        this.app.route('/api/organization').get(OrganizationRoutes.getAll);
+        this.app.route('/api/organization/:id').get(OrganizationRoutes.getByID);
+        this.app.route('/api/organization/:id').delete(OrganizationRoutes.delete)
+        this.app.route('/api/organization').post(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.create);
+        this.app.route('/api/organization/:id').put(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.update)
     };
 
     dataBaseConnection() {
