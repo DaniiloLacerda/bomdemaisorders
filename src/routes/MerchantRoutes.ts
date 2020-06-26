@@ -1,6 +1,5 @@
 import * as httpStatus from 'http-status';
-import OrganizationController from '../controllers/OrganizationController';
-
+import MerchantController from '../controllers/MerchantController';
 
 const sendResponse = function (res, statusCode, data) {
     res.status(statusCode).json({ 'result': data });
@@ -11,7 +10,7 @@ class OrganizationRoutes {
     constructor() { }
 
     getAll(req, res) {
-        OrganizationController
+        MerchantController
             .getAll()
             .then(result => sendResponse(res, httpStatus.OK, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
@@ -20,7 +19,7 @@ class OrganizationRoutes {
     getByID(req, res) {
         const id = { _id: req.params.id };
 
-        OrganizationController
+        MerchantController
             .getByID(id)
             .then(result => {
                 if (result !== null) {
@@ -35,26 +34,25 @@ class OrganizationRoutes {
     create(req, res) {
         const order = req.body;
 
-        OrganizationController
+        MerchantController
             .create(order)
             .then(result => sendResponse(res, httpStatus.CREATED, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     update(req, res) {
-        const id = { _id: req.params.id };
+        const id = { _id: req.params.id }
         const order = req.body;
-
-        OrganizationController
+        
+        MerchantController
             .update(id, order)
             .then(result => sendResponse(res, httpStatus.OK, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     delete(req, res) {
-        const order = { _id: req.params.id };
-
-        OrganizationController
+        const order = { _id: req.params.id }
+        MerchantController
             .delete(order)
             .then(result => sendResponse(res, httpStatus.OK, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))

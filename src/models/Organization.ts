@@ -5,7 +5,12 @@ const Organization = new Schema({
         type: String,
         required: true,
         unique: true
-    },    
+    },
+    cnpj: {
+        type: String,
+        required: true,
+        unique: true
+    }
 }, {
     timestamps: true
 });

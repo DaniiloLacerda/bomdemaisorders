@@ -13,6 +13,8 @@ import CategorySchema from './helpers/schemas/CategorySchema';
 import VendorSchema from './helpers/schemas/VendorSchema';
 import OrderSchema from './helpers/schemas/OrderSchema';
 import OrganizationSchema from './helpers/schemas/OrganizationSchema';
+import MerchantRoutes from './routes/MerchantRoutes';
+import MerchantSchema from './helpers/schemas/MerchantSchema';
 
 class App {
     public app: express.Application;
@@ -26,6 +28,7 @@ class App {
         this.vendorRoutes();
         this.orderRoutes();
         this.organizationRoutes();
+        this.merchantsRoutes();
         this.database = new DataBase();
         this.dataBaseConnection();
     };
@@ -57,7 +60,7 @@ class App {
         this.app.route('/api/vendor/:id').get(VendorRoutes.getByID);
         this.app.route('/api/vendor/:id').delete(VendorRoutes.delete)
         this.app.route('/api/vendor').post(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.create);
-        this.app.route('/api/vendor/:id').put(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.update)
+        this.app.route('/api/vendqor/:id').put(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.update)
     };
 
     orderRoutes() {
@@ -74,6 +77,14 @@ class App {
         this.app.route('/api/organization/:id').delete(OrganizationRoutes.delete)
         this.app.route('/api/organization').post(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.create);
         this.app.route('/api/organization/:id').put(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.update)
+    };
+
+    merchantsRoutes() {
+        this.app.route('/api/merchant').get(MerchantRoutes.getAll);
+        this.app.route('/api/merchant/:id').get(MerchantRoutes.getByID);
+        this.app.route('/api/merchant/:id').delete(MerchantRoutes.delete)
+        this.app.route('/api/merchant').post(Middleware.middleware(MerchantSchema, 'body'), MerchantRoutes.create);
+        this.app.route('/api/merchant/:id').put(Middleware.middleware(MerchantSchema, 'body'), MerchantRoutes.update)
     };
 
     dataBaseConnection() {

@@ -1,7 +1,7 @@
 import * as Joi from '@hapi/joi';
 
 const quantity = Joi.object({
-    shopId: Joi.string().required().label("shopId da quantidade é obrigatório"),
+    merchantId: Joi.string().required().label("merchantId da quantidade é obrigatório"),
     qty: Joi.string().required().label("qty quantidade obrigatório")
 });
 
