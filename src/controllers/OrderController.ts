@@ -16,10 +16,8 @@ class OrderController {
         return Order.create(order);
     }
 
-    update(id, orders) {
-        const order = {
-            name: orders.name
-        }
+    update(id, order) {
+
         return Order.findByIdAndUpdate(id, order, { new: true });
     }
 

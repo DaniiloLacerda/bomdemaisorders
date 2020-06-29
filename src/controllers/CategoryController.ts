@@ -15,11 +15,8 @@ class CategoryController {
         return Category.create(category);
     };
 
-    update(id, category) {
-        const categorys = {
-            name: category.name
-        }
-        return Category.findByIdAndUpdate(id, categorys, { new: true });
+    update(id, category) {   
+        return Category.findByIdAndUpdate(id, category, { new: true });
     };
 
     delete(id) {

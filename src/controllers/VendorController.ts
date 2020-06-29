@@ -16,11 +16,8 @@ class VendorController {
         return Vendor.create(products);
     }
 
-    update(id, vendors) {
-        const vendor = {
-            name: vendors.name
-        }
-        return Vendor.findByIdAndUpdate(id, vendor, { new: true });
+    update(id, vendors) { 
+        return Vendor.findByIdAndUpdate(id, vendors, { new: true });
     }
 
     delete(id) {

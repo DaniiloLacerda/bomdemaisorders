@@ -16,11 +16,8 @@ class ProductController {
         return Products.create(products);
     }
 
-    update(id, products) {
-        const product = {
-            name: products.name
-        }
-        return Products.findByIdAndUpdate(id, product, { new: true });
+    update(id, products) {        
+        return Products.findByIdAndUpdate(id, products, { new: true });
     }
 
     delete(id) {

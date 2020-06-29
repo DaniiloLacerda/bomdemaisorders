@@ -12,14 +12,10 @@ class MerchantController {
     }
 
     create(merchant) {
-
         return Merchant.create(merchant);
     }
 
-    update(id, merchant) {
-        const merchants = {
-            name: merchant.name
-        }
+    update(id, merchants) {
         return Merchant.findByIdAndUpdate(id, merchants, { new: true });
     }
 

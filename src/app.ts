@@ -15,6 +15,8 @@ import OrderSchema from './helpers/schemas/OrderSchema';
 import OrganizationSchema from './helpers/schemas/OrganizationSchema';
 import MerchantRoutes from './routes/MerchantRoutes';
 import MerchantSchema from './helpers/schemas/MerchantSchema';
+import UserRoutes from './routes/UserRoutes';
+import UserSchema from './helpers/schemas/UserSchema';
 
 class App {
     public app: express.Application;
@@ -29,6 +31,7 @@ class App {
         this.orderRoutes();
         this.organizationRoutes();
         this.merchantsRoutes();
+        this.userRoutes();
         this.database = new DataBase();
         this.dataBaseConnection();
     };
@@ -44,7 +47,7 @@ class App {
         this.app.route('/api/products/:id').get(ProductRoutes.getByID);
         this.app.route('/api/products/:id').delete(ProductRoutes.delete)
         this.app.route('/api/products').post(Middleware.middleware(ProductSchema, 'body'), ProductRoutes.create);
-        this.app.route('/api/products/:id').put(Middleware.middleware(ProductSchema, 'body'), ProductRoutes.update)
+        this.app.route('/api/products/:id').put(Middleware.middleware(ProductSchema, 'body'), ProductRoutes.update);
     };
 
     categoryRoutes() {
@@ -52,7 +55,7 @@ class App {
         this.app.route('/api/category/:id').get(CategoryRoutes.getByID);
         this.app.route('/api/category/:id').delete(CategoryRoutes.delete)
         this.app.route('/api/category').post(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.create);
-        this.app.route('/api/category/:id').put(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.update)
+        this.app.route('/api/category/:id').put(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.update);
     };
 
     vendorRoutes() {
@@ -60,7 +63,7 @@ class App {
         this.app.route('/api/vendor/:id').get(VendorRoutes.getByID);
         this.app.route('/api/vendor/:id').delete(VendorRoutes.delete)
         this.app.route('/api/vendor').post(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.create);
-        this.app.route('/api/vendqor/:id').put(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.update)
+        this.app.route('/api/vendor/:id').put(Middleware.middleware(VendorSchema, 'body'), VendorRoutes.update);
     };
 
     orderRoutes() {
@@ -68,7 +71,7 @@ class App {
         this.app.route('/api/order/:id').get(OrderRoutes.getByID);
         this.app.route('/api/order/:id').delete(OrderRoutes.delete)
         this.app.route('/api/order').post(Middleware.middleware(OrderSchema, 'body'), OrderRoutes.create);
-        this.app.route('/api/order/:id').put(Middleware.middleware(OrderSchema, 'body'), OrderRoutes.update)
+        this.app.route('/api/order/:id').put(Middleware.middleware(OrderSchema, 'body'), OrderRoutes.update);
     };
 
     organizationRoutes() {
@@ -76,7 +79,7 @@ class App {
         this.app.route('/api/organization/:id').get(OrganizationRoutes.getByID);
         this.app.route('/api/organization/:id').delete(OrganizationRoutes.delete)
         this.app.route('/api/organization').post(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.create);
-        this.app.route('/api/organization/:id').put(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.update)
+        this.app.route('/api/organization/:id').put(Middleware.middleware(OrganizationSchema, 'body'), OrganizationRoutes.update);
     };
 
     merchantsRoutes() {
@@ -84,7 +87,15 @@ class App {
         this.app.route('/api/merchant/:id').get(MerchantRoutes.getByID);
         this.app.route('/api/merchant/:id').delete(MerchantRoutes.delete)
         this.app.route('/api/merchant').post(Middleware.middleware(MerchantSchema, 'body'), MerchantRoutes.create);
-        this.app.route('/api/merchant/:id').put(Middleware.middleware(MerchantSchema, 'body'), MerchantRoutes.update)
+        this.app.route('/api/merchant/:id').put(Middleware.middleware(MerchantSchema, 'body'), MerchantRoutes.update);
+    };
+
+    userRoutes() {
+        this.app.route('/api/user').get(UserRoutes.getAll);
+        this.app.route('/api/user/:id').get(UserRoutes.getByID);
+        this.app.route('/api/user/:id').delete(UserRoutes.delete)
+        this.app.route('/api/user').post(Middleware.middleware(UserSchema, 'body'), UserRoutes.create);
+        this.app.route('/api/user/:id').put(Middleware.middleware(UserSchema, 'body'), UserRoutes.update);
     };
 
     dataBaseConnection() {

@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
 
 const Order = new Schema({
+    organizationId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Organization',
+        required: true
+    },
     items: {
         type: Object,
         required: true,

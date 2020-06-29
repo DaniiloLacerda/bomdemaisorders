@@ -18,7 +18,8 @@ const OrderSchema = Joi.object({
     items: Joi.array().required().items(items).label("items obrigatório"),
     deliveryFee: Joi.string().required(),
     subTotal: Joi.string().required(),
-    total: Joi.string().required()
+    total: Joi.string().required(),
+    organizationId: Joi.string().required()
 });
 
 export default OrderSchema;

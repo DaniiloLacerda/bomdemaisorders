@@ -1,61 +1,58 @@
 import * as httpStatus from 'http-status';
-import MerchantController from '../controllers/MerchantController';
+import UserController from '../controllers/UserController';
 
 const sendResponse = function (res, statusCode, data) {
     res.status(statusCode).json({ 'result': data });
 };
 
-class OrganizationRoutes {
-
+class UserRoutes {
     constructor() { }
 
     getAll(req, res) {
-        MerchantController
+        UserController
             .getAll()
-            .then(result => sendResponse(res, httpStatus.OK, result))
+            .then(user => sendResponse(res, httpStatus.OK, user))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     getByID(req, res) {
-        const id = { _id: req.params.id };
-
-        MerchantController
-            .getByID(id)
+        const user = { _id: req.params.id };
+        UserController
+            .getByID(user)
             .then(result => {
-                if (result !== null) {
+                if (user !== null) {
                     sendResponse(res, httpStatus.OK, result)
                 } else {
-                    sendResponse(res, httpStatus.OK, "Organizazao não localizado")
+                    sendResponse(res, httpStatus.OK, "Usuario Nao encontrado")
                 }
             })
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     create(req, res) {
-        const order = req.body;
-        MerchantController
-            .create(order)
+        const user = req.body;
+        UserController
+            .create(user)
             .then(result => sendResponse(res, httpStatus.CREATED, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     update(req, res) {
         const id = { _id: req.params.id }
-        const order = req.body;
-        
-        MerchantController
-            .update(id, order)
+        const user = req.body;
+        UserController
+            .update(id, user)
             .then(result => sendResponse(res, httpStatus.OK, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 
     delete(req, res) {
-        const order = { _id: req.params.id }
-        MerchantController
-            .delete(order)
+        const id = { _id: req.params.id }
+        UserController
+            .delete(id)
             .then(result => sendResponse(res, httpStatus.OK, result))
             .catch(err => sendResponse(res, httpStatus.INTERNAL_SERVER_ERROR, err))
     };
 };
 
-export default new OrganizationRoutes();
+export default new UserRoutes();
