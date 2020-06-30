@@ -3,7 +3,6 @@ import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import DataBase from './config/db';
 import ProductRoutes from './routes/ProductRoutes';
-import CategoryRoutes from './routes/CategoryRoutes';
 import VendorRoutes from './routes/VendorRoutes';
 import OrderRoutes from './routes/OrderRoutes';
 import OrganizationRoutes from './routes/OrganizationRoutes';
@@ -26,7 +25,7 @@ class App {
         this.app = express();
         this.middleware();
         this.productRoutes();
-        this.categoryRoutes();
+        //this.categoryRoutes();
         this.vendorRoutes();
         this.orderRoutes();
         this.organizationRoutes();
@@ -50,13 +49,13 @@ class App {
         this.app.route('/api/products/:id').put(Middleware.middleware(ProductSchema, 'body'), ProductRoutes.update);
     };
 
-    categoryRoutes() {
-        this.app.route('/api/category').get(CategoryRoutes.getAll);
-        this.app.route('/api/category/:id').get(CategoryRoutes.getByID);
-        this.app.route('/api/category/:id').delete(CategoryRoutes.delete)
-        this.app.route('/api/category').post(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.create);
-        this.app.route('/api/category/:id').put(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.update);
-    };
+    // categoryRoutes() {
+    //     this.app.route('/api/category').get(CategoryRoutes.getAll);
+    //     this.app.route('/api/category/:id').get(CategoryRoutes.getByID);
+    //     this.app.route('/api/category/:id').delete(CategoryRoutes.delete)
+    //     this.app.route('/api/category').post(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.create);
+    //     this.app.route('/api/category/:id').put(Middleware.middleware(CategorySchema, 'body'), CategoryRoutes.update);
+    // };
 
     vendorRoutes() {
         this.app.route('/api/vendor').get(VendorRoutes.getAll);

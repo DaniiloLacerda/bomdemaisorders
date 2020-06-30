@@ -7,7 +7,8 @@ const Order = new Schema({
         required: true
     },
     items: {
-        type: Object,
+        type: Schema.Types.Array,
+        ref: 'OrderItems',
         required: true,
         unique: false
     },

@@ -1,6 +1,6 @@
 import App from './app';
 
-App.app.listen(5000, () =>
+App.app.listen(3000, () =>
     console.log('servidor rodando, porta: 5000'));
 
 process.once('SIGUSR2', () => App.closeDataBaseConnection('nodemon restart', () => process.kill(process.pid, 'SIGUSR2')));
