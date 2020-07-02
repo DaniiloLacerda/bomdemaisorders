@@ -1,7 +1,5 @@
 import { injectable } from "inversify";
 import Category from "../models/Category";
-
-
 @injectable()
 export class CategoryRepository {
     getAll() {

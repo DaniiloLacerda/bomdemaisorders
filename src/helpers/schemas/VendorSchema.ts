@@ -6,5 +6,4 @@ const VendorSchema = Joi.object({
     paymentForm: Joi.string().required().valid([PaymentsForm.CASH, PaymentsForm.DEFERRED]),
 });
 
-
 export default VendorSchema

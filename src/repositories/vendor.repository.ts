@@ -1,6 +1,8 @@
 import Vendor from '../models/Vendor';
+import { injectable } from 'inversify';
 
-class VendorController {
+@injectable()
+export class VendorRepository {
     constructor() { }
 
     getAll() {
@@ -16,7 +18,7 @@ class VendorController {
         return Vendor.create(products);
     }
 
-    update(id, vendors) { 
+    update(id, vendors) {
         return Vendor.findByIdAndUpdate(id, vendors, { new: true });
     }
 
@@ -24,5 +26,3 @@ class VendorController {
         return Vendor.remove(id);
     }
 }
-
-export default new VendorController();

@@ -1,6 +1,8 @@
 import Products from '../models/Product';
+import { injectable } from 'inversify';
 
-class ProductController {
+@injectable()
+export class ProductRepository {
     constructor() { }
 
     getAll() {
@@ -16,7 +18,7 @@ class ProductController {
         return Products.create(products);
     }
 
-    update(id, products) {        
+    update(id, products) {
         return Products.findByIdAndUpdate(id, products, { new: true });
     }
 
@@ -24,5 +26,3 @@ class ProductController {
         return Products.remove(id);
     }
 }
-
-export default new ProductController();
