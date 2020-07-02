@@ -1,34 +1,43 @@
 import { Schema, model } from 'mongoose';
 
-const Order = new Schema({
+const Merchant = new Schema({
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    cnpj: {
+        type: String,
+        required: true,
+        unique: true
+    },
     organizationId: {
         type: Schema.Types.ObjectId,
         ref: 'Organization',
         required: true
     },
-    items: {
-        type: Schema.Types.Array,
-        ref: 'OrderItems',
+    address: {
+        type: String,
         required: true,
-        unique: false
+        unique: true
     },
-    deliveryFee: {
+    city: {
         type: String,
         required: true,
         unique: false
     },
-    subTotal: {
+    state: {
         type: String,
         required: true,
         unique: false
     },
-    total: {
+    phone: {
         type: String,
         required: true,
         unique: false
-    }
+    },
 }, {
     timestamps: true
 });
 
-export default model('Order', Order)
+export default model('Merchant', Merchant)

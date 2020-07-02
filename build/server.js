@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("reflect-metadata");
+var appcontainer_1 = require("./appcontainer");
+var inversify_express_utils_1 = require("inversify-express-utils");
+var app_1 = require("./app");
+require("./controllers/category.controller");
+require("./controllers/product.controller");
+require("./controllers/vendor.controller");
+process.once('SIGUSR2', function () { return app_1.default.closeDataBaseConnection('nodemon restart', function () { return process.kill(process.pid, 'SIGUSR2'); }); });
+process.on('SIGINT', function () { return app_1.default.closeDataBaseConnection('execução foi interrompida', function () { return process.exit(0); }); });
+var server = new inversify_express_utils_1.InversifyExpressServer(appcontainer_1.default, null, { rootPath: "/api" }, app_1.default.app);
+var serverInstance = server.build();
+serverInstance.listen(5000);
+console.log("Server started on port " + 5000 + " :)");

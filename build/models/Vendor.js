@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose';
-
-const Vendor = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var mongoose_1 = require("mongoose");
+var Vendor = new mongoose_1.Schema({
     name: {
         type: String,
         required: true,
@@ -14,5 +15,4 @@ const Vendor = new Schema({
 }, {
     timestamps: true
 });
-
-export default model('Vendor', Vendor)
+exports.default = mongoose_1.model('Vendor', Vendor);

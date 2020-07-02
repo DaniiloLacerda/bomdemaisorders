@@ -1,18 +1,18 @@
 import { Schema, model } from 'mongoose';
 
-const Vendor = new Schema({
+const Organization = new Schema({
     name: {
         type: String,
         required: true,
         unique: true
     },
-    paymentForm: {
+    cnpj: {
         type: String,
         required: true,
-        unique: false
+        unique: true
     }
 }, {
     timestamps: true
 });
 
-export default model('Vendor', Vendor)
+export default model('Organization', Organization)

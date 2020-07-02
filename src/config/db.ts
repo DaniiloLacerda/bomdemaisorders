@@ -1,13 +1,13 @@
 import * as mongoose from 'mongoose';
 
-class DataBase {
+export class DataBase {
     private DB_URI = 'mongodb://localhost:17017/bomdemaispedidos';
     private DB_CONNECTION;
 
     constructor() { }
 
     createConnection() {
-        mongoose.connect(this.DB_URI, { useCreateIndex: true, useNewUrlParser: true });
+        mongoose.connect(this.DB_URI, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
         this.logger(this.DB_URI);
     }
 
@@ -25,4 +25,3 @@ class DataBase {
         this.DB_CONNECTION.on('disconnected', () => console.log("Mongoose está desconectado do " + uri));
     }
 }
-export default DataBase;
