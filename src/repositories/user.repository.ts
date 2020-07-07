@@ -1,6 +1,8 @@
-import User from "../models/User";
+import User from '../models/Product';
+import { injectable } from 'inversify';
 
-class UserController {
+@injectable()
+export class UserRepository {
     constructor() { }
 
     getAll() {
@@ -12,6 +14,7 @@ class UserController {
     }
 
     create(user) {
+
         return User.create(user);
     }
 
@@ -23,5 +26,3 @@ class UserController {
         return User.remove(id);
     }
 }
-
-export default new UserController();

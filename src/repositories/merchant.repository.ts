@@ -1,6 +1,8 @@
-import Merchant from "../models/Merchant";
+import { injectable } from 'inversify';
+import Merchant from '../models/Merchant';
 
-class MerchantController {
+@injectable()
+export class MerchantRepository {
     constructor() { }
 
     getAll() {
@@ -12,11 +14,15 @@ class MerchantController {
     }
 
     create(merchant) {
+
         return Merchant.create(merchant);
     }
 
     update(id, merchants) {
-        return Merchant.findByIdAndUpdate(id, merchants, { new: true });
+        const merchant = {
+            name: merchants.name
+        }
+        return Merchant.findByIdAndUpdate(id, merchant, { new: true });
     }
 
     delete(id) {
@@ -24,4 +30,3 @@ class MerchantController {
     }
 }
 
-export default new MerchantController();

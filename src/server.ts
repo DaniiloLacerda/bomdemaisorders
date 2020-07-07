@@ -5,6 +5,9 @@ import App from './app';
 import './controllers/category.controller';
 import './controllers/product.controller';
 import './controllers/vendor.controller';
+import './controllers/organization.controller';
+import './controllers/merchant.controller';
+import './controllers/user.controller';
 
 process.once('SIGUSR2', () => App.closeDataBaseConnection('nodemon restart', () => process.kill(process.pid, 'SIGUSR2')));
 process.on('SIGINT', () => App.closeDataBaseConnection('execução foi interrompida', () => process.exit(0)));

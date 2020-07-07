@@ -1,6 +1,8 @@
 import Organization from '../models/Organization';
+import { injectable } from 'inversify';
 
-class OrganizationController {
+@injectable()
+export class OrganizationRepository {
     constructor() { }
 
     getAll() {
@@ -28,4 +30,3 @@ class OrganizationController {
     }
 }
 
-export default new OrganizationController();
