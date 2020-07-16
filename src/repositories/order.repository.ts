@@ -1,6 +1,8 @@
 import Order from '../models/Order';
+import { injectable } from 'inversify';
 
-class OrderController {
+@injectable()
+export class OrderRepository {
     constructor() { }
 
     getAll() {
@@ -16,9 +18,8 @@ class OrderController {
         return Order.create(order);
     }
 
-    update(id, order) {
-
-        return Order.findByIdAndUpdate(id, order, { new: true });
+    update(id, orders) {        
+        return Order.findByIdAndUpdate(id, orders, { new: true });
     }
 
     delete(id) {
@@ -26,4 +27,3 @@ class OrderController {
     }
 }
 
-export default new OrderController();

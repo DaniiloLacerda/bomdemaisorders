@@ -7,6 +7,7 @@ import { VendorRepository } from './repositories/vendor.repository';
 import { OrganizationRepository } from './repositories/organization.repository';
 import { MerchantRepository } from './repositories/merchant.repository';
 import { UserRepository } from './repositories/user.repository';
+import { OrderRepository } from './repositories/order.repository';
 
 const container = new Container();
 
@@ -16,5 +17,6 @@ container.bind<VendorRepository>(TYPES.VendorRepository).to(VendorRepository).in
 container.bind<OrganizationRepository>(TYPES.OrganizationRepository).to(OrganizationRepository).inSingletonScope();
 container.bind<MerchantRepository>(TYPES.MerchantRepository).to(MerchantRepository).inSingletonScope();
 container.bind<UserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
+container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepository).inSingletonScope();
 
 export default container;

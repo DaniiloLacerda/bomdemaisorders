@@ -3,42 +3,42 @@ import { interfaces, controller, httpGet, httpPost, httpPut, httpDelete } from "
 import TYPES from '../types';
 import { inject } from 'inversify';
 import Middleware from '../helpers/Middleware';
-import { OrganizationRepository } from '../repositories/organization.repository';
-import OrganizationSchema from '../helpers/schemas/OrganizationSchema';
+import { OrderRepository } from '../repositories/order.repository';
+import OrderSchema from '../helpers/schemas/OrderSchema';
 
-@controller("/organization")
-export class OrganizationController implements interfaces.Controller {
+@controller("/order")
+export class OrderController implements interfaces.Controller {
 
   constructor(
-    @inject(TYPES.OrganizationRepository) readonly organizationRepository: OrganizationRepository) {
+    @inject(TYPES.OrderRepository) readonly orderRepository: OrderRepository) {
   }
 
   @httpGet("/")
   public async get(req: Request, res: Response) {
     try {
-      const organization = await this.organizationRepository.getAll();
-      res.status(200).json(organization);
+      const order = await this.orderRepository.getAll();
+      res.status(200).json(order);
     } catch (error) {
       res.status(400).json(error);
     }
   }
 
-  @httpPost("/", Middleware.middleware(OrganizationSchema, 'body'))
+  @httpPost("/", Middleware.middleware(OrderSchema, 'body'))
   public async post(req: Request, res: Response) {
     try {
-      const organization = await this.organizationRepository.create(req.body);
-      res.status(200).json(organization);
+      const order = await this.orderRepository.create(req.body);
+      res.status(200).json(order);
     } catch (error) {
       res.status(400).json(error);
     }
   }
 
-  @httpPut("/:id", Middleware.middleware(OrganizationSchema, 'body'))
+  @httpPut("/:id", Middleware.middleware(OrderSchema, 'body'))
   public async put(req: Request, res: Response) {
     try {
       const id = { _id: req.params.id };
-      const organization = req.body;;
-      const result = await this.organizationRepository.update(id, organization);
+      const order = req.body;
+      const result = await this.orderRepository.update(id, order);     
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json(error);
@@ -49,8 +49,7 @@ export class OrganizationController implements interfaces.Controller {
   public async delete(req: Request, res: Response) {
     try {
       const id = { _id: req.params.id };
-
-      const result = await this.organizationRepository.delete(id);
+      const result = await this.orderRepository.delete(id);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json(error);

@@ -37,8 +37,8 @@ export class CategoryController implements interfaces.Controller {
   public async put(req: Request, res: Response) {
     try {
       const id = { _id: req.params.id };
-      const category = req.body;;
-      const result = await this.categoryRepository.update(id, category);
+      const category = req.body;
+      const result = await this.categoryRepository.update(id, category); 
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json(error);
