@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 export class DataBase {
-    private DB_URI = 'mongodb://localhost:17017/bomdemaispedidos';
+    private DB_URI = 'mongodb://localhost:27017/bomdemaispedidos';
     private DB_CONNECTION;
 
     constructor() { }

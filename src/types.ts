@@ -4,7 +4,8 @@ const TYPES = {
     VendorRepository: Symbol('VendorRepository'),
     OrganizationRepository: Symbol('OrganizationRepository'),
     MerchantRepository: Symbol('MerchantRepository'),
-    UserRepository: Symbol('UserRepository')
+    UserRepository: Symbol('UserRepository'),
+    OrderRepository: Symbol('OrderRepository')
 };
 
 export default TYPES;
